@@ -6,7 +6,7 @@
 
 ## 2. Reference
 
-[MySQL Tutorial](https://www.w3schools.com/mysql/default.asp)
+[MySQL Tutorial - W3Schools](https://www.w3schools.com/mysql/default.asp)
 
 ### 3. Docker
 
@@ -45,7 +45,7 @@ mysql> source /tmp/setup.sql
 
 ---
 
-Check if the database, tables and record are created successfully.
+Check if the database, tables and records are created successfully.
 
 ```bash
 mysql> SHOW DATABASES;
@@ -66,14 +66,14 @@ mysql> SHOW TABLES;
 +--------------------+
 | Tables_in_tutorial |
 +--------------------+
-| Categories         |
-| Customers          |
-| Employees          |
-| OrderDetails       |
-| Orders             |
-| Products           |
-| Shippers           |
-| Suppliers          |
+| categories         |
+| customers          |
+| employees          |
+| order_details      |
+| orders             |
+| products           |
+| shippers           |
+| suppliers          |
 +--------------------+
 8 rows in set (0.00 sec)
 
@@ -82,50 +82,50 @@ mysql> SELECT * FROM {TABLE_NAME};
 
 ## 4. Tables
 
-### 4-1. Categories
+### 4-1. categories
 
-|CategoryID |CategoryName |Description |
+|id |name |description |
 |:-|:-|:-|
 |PRIMARY KEY |varchar(255) |varchar(255) |
 
-### 4-2. Customers
+### 4-2. customers
 
-|CustomerID |CustomerName |ContactName |Address |City |PostalCode |Country |
+|id |name |contact |address |City |zipcode |country |
 |:-|:-|:-|:-|:-|:-|:-|
 |PRIMARY KEY |varchar(255) |varchar(255) |varchar(255) |varchar(255) |varchar(255) |varchar(255) |
 
-### 4-3. Employees
+### 4-3. employees
 
-|EmployeeID |LastName |FirstName |BirthDate |Photo |Notes |
+|id |last_name |first_name |birthdate |photo |notes |
 |:-|:-|:-|:-|:-|:-|
 |PRIMARY KEY |varchar(255) |varchar(255) |date |varchar(255) |varchar(255) |
 
-### 4-4. Shippers
+### 4-4. shippers
 
-|ShipperID |ShipperName |Phone |
+|id |name |phone |
 |:-|:-|:-|
 |PRIMARY KEY |varchar(255) |varchar(255) |
 
-### 4-5. Suppliers
+### 4-5. suppliers
 
-|SupplierID |SupplierName |ContactName |Address |City |PostalCode |Country |Phone |
+|id |name |contact |address |city |zipcode |country |phone |
 |:-|:-|:-|:-|:-|:-|:-|:-|
 |PRIMARY KEY |varchar(255) |varchar(255) |varchar(255) |varchar(255) |varchar(255) |varchar(255) |varchar(255) |
 
-### 4-6. Products
+### 4-6. products
 
-|ProductID |ProductName |SupplierID |CategoryID |Unit |Price |
+|id |name |supplier_id |category_id |unit |price |
 |:-|:-|:-|:-|:-|:-|
 |PRIMARY KEY |varchar(255) |FOREIGN KEY |FOREIGN KEY |varchar(255) |float(5) |
 
-### 4-7. Orders
+### 4-7. orders
 
-|OrderID |CustomerID |EmployeeID |OrderDate |ShipperID |
+|id |customer_id |employee_id |order_date |shipper_id |
 |:-|:-|:-|:-|:-|
 |PRIMARY KEY |FOREIGN KEY |FOREIGN KEY |date |FOREIGN KEY |
 
-### 4-8. OrderDetails
+### 4-8. order_details
 
-|OrderDetailID |OrderID |ProductID |Quantity |
+|id |order_id |product_id |quantity |
 |:-|:-|:-|:-|
 |PRIMARY KEY |FOREIGN KEY |FOREIGN KEY |int |
