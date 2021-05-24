@@ -15,10 +15,21 @@
 ```bash
 $ echo 'export MYSQL_PASSWORD="password"' >> ~/.bash_profile
 $ docker-compose up -d
+```
+
+### 3-2. Copy `setup.sql` to `/tmp` directory in Docker container
+
+```bash
+$ docker cp setup.sql {CONTAINER ID}:/tmp/
+```
+
+### 3-3. Create DB, Tables and Insert Records
+
+```bash
 $ docker-compose exec db mysql -u root -p
-Enter password: password
+Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 248
+Your MySQL connection id is 163
 Server version: 8.0.24 MySQL Community Server - GPL
 
 Copyright (c) 2000, 2021, Oracle and/or its affiliates.
@@ -29,20 +40,45 @@ owners.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-mysql>
+mysql> source /tmp/setup.sql
 ```
 
-### 3-2. Create DB
+---
 
-```sql
-CREATE TABLE {DB_NAME};
-SHOW DATABASES;
-USE {DB_NAME};
+Check if the database, tables and record are created successfully.
+
+```bash
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| tutorial           |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> USE tutorial;
+Database changed
+mysql> SHOW TABLES;
++--------------------+
+| Tables_in_tutorial |
++--------------------+
+| Categories         |
+| Customers          |
+| Employees          |
+| OrderDetails       |
+| Orders             |
+| Products           |
+| Shippers           |
+| Suppliers          |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT * FROM {TABLE_NAME};
 ```
-
-### 3-3. Create Tables and Insert Records
-
-Please refer to [SQL files](https://github.com/oasis-forever/mysql_tutorial/tree/master/sqls).
 
 ## 4. Tables
 
@@ -82,14 +118,14 @@ Please refer to [SQL files](https://github.com/oasis-forever/mysql_tutorial/tree
 |:-|:-|:-|:-|:-|:-|
 |PRIMARY KEY |varchar(255) |FOREIGN KEY |FOREIGN KEY |varchar(255) |float(5) |
 
-### 4-7. OrderDetails
-
-|OrderDetailID |OrderID |ProductID |Quantity |
-|:-|:-|:-|:-|
-|PRIMARY KEY |FOREIGN KEY |FOREIGN KEY |int |
-
-### 4-8. Orders
+### 4-7. Orders
 
 |OrderID |CustomerID |EmployeeID |OrderDate |ShipperID |
 |:-|:-|:-|:-|:-|
 |PRIMARY KEY |FOREIGN KEY |FOREIGN KEY |date |FOREIGN KEY |
+
+### 4-8. OrderDetails
+
+|OrderDetailID |OrderID |ProductID |Quantity |
+|:-|:-|:-|:-|
+|PRIMARY KEY |FOREIGN KEY |FOREIGN KEY |int |
